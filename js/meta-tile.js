@@ -25,7 +25,7 @@ function MetaTileCtrl($scope) {
       if (data[get_guid()] === undefined) { // where presets are set
         data[get_guid()] = {};
         data[get_guid()].options = {};
-        data[get_guid()].options.open_using = "normal";
+        data[get_guid()].options.open_using = "newtab";
         data[get_guid()].tiles = presets;
         chrome.storage.sync.set(data);
       }
@@ -61,7 +61,7 @@ function MetaTileCtrl($scope) {
           }
           break;
         default:
-          $scope.grid = "one-four";
+          $scope.grid = "one-nine";
       }
       $("link").attr("href", "/css/" + $scope.grid + ".css");
       if(data[get_guid()].options && data[get_guid()].options.disable_search != true) {
@@ -133,9 +133,87 @@ function deadOrAlive() {
   }
 }
 
-var presets = [ // for new 1/4 tiles
+var presets = [ // for new 1/9 tiles
+  //  top row
+ {name: "Extensions",
+  url:  "chrome://extensions",
+  image: "",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: ""
+  },
   {name: "Wikipedia", url: "http://www.wikipedia.com/", image: "/tile_images/wikipedia.png", color: "#000000", sub_guid: new_guid(), search: "http://en.wikipedia.org/wiki/%s"},
   {name: "reddit", url: "http://www.reddit.com/", image: "/tile_images/reddit.png", color: "#FF936B", sub_guid: new_guid(), search: "http://www.reddit.com/search?q=%s"},
-  {name: "Pinterest", url: "http://www.pinterest.com/", image: "/tile_images/pinterest.png", color: "#CB2027", sub_guid: new_guid(), search: "http://pinterest.com/search/?q=%s"},
-  {name: "New York Times", url: "http://www.nytimes.com/", image: "/tile_images/newyorktimes.png", color: "#444444", sub_guid: new_guid(), search: "http://query.nytimes.com/search/sitesearch/#/%s"}
+
+  // middle row
+ {name: "Passwords",
+  url:  "chrome://settings/passwords",
+  image: "",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: ""
+  },
+
+ {name: "Amazon",
+  url:  "https://amazon.com",
+  image: "/tile_images/amazon.png",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: "https://www.amazon.com/field-keywords=%s"
+  },
+
+ {name: "GitHub",
+  url:  "https://github.com",
+  image: "https://github.com/fluidicon.png",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: "https://github.com/search?q=%s"
+  },
+
+  // bottom row
+ {name: "Stack Overflow",
+  url:  "https://stackoverflow.com/",
+  image: "https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: "https://stackoverflow.com/questions/tagged/%s"
+  },
+
+ {name: "Twitter",
+  url:  "https://tweetdeck.com/",
+  image: "/tile_images/twitter.png",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: "https://twitter.com/search?q=%s"
+  },
+
+ {name: "Mozilla Dev Network",
+  url:  "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+  image: "https://developer.mozilla.org/static/img/favicon32.7f3da72dcea1.png",
+  color: "#000000",
+  sub_guid: new_guid(),
+  search: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/%s"
+  },
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
