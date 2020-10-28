@@ -40,7 +40,12 @@
 
       .colorpicker_rgb_r, .colorpicker_rgb_g, .colorpicker_rgb_b,
       .colorpicker_hsb_h, .colorpicker_hsb_s, .colorpicker_hsb_b, .colorpicker_hex {
-        display: none;
+        display: block;
+      }
+
+      .colorpicker input {
+        width: 37px !important;
+        height: 18px !important;
       }
 
       .control-group {
@@ -87,6 +92,18 @@
                 <button class="setsize btn">Set</button>
               </div>
             </div>
+            <div class="control-group" style="display:block;">
+              <label class="control-label" for="open_using"><b>Open links using:</b></label>
+              <div class="controls">
+                <select id="open_using" name="open_using" class="span3">
+                  <option value="normal">Default</option>
+                  <option value="newtab">New Tab</option>
+                  <option value="newtab-inactive">New Tab (Inactive)</option>
+                  <option value="pin">Pin</option>
+                  <option value="pin-inactive">Pin (Inactive)</option>
+                </select>
+              </div>
+            </div>
             <input id="disable_search" type="checkbox"> <b>Disable search in this widget?</b> Alternatively, just remove the Search URLs.
             <br>
             <input id="background_transparent_preview" type="checkbox" checked="true"> <b>Use colored background in widget preview?</b> (only to show transparently-backgrounded icons, and will not affect the actual widget)
@@ -96,7 +113,7 @@
         <div class="span12">
           <form class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="preset">Set Shortcut from Pre-set</label>
+              <label class="control-label" for="presets">Set Shortcut from Pre-set</label>
               <div class="controls">
                 <select id="presets" name="presets" class="span3">
                   <option value="">None</option>
@@ -140,7 +157,7 @@
               <label class="control-label" for="search">Sub-Shortcut Search URL</label>
               <div class="controls">
                 <input type="text" id="search" class="input-xlarge" placeholder="">
-                <span class="help-inline">Don't change this unless you know what you're doing. (uses sprintf %s)</span>
+                <span class="help-inline">Don't change this unless you know what you're doing. (uses sprintf %s as well as {input})</span>
               </div>
             </div>
 

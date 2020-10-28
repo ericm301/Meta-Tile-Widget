@@ -90,6 +90,19 @@ $(document).ready(function() {
       $('#colorSelector').css('backgroundColor', '#' + hex);
       new_instance = set_instance($(".guid").html(), "color", "#" + hex);
       $("#background_transparent").attr("checked", false);
+    },
+    onBeforeShow: function () {
+      // RGB to HEX
+      var rgbString = $('#colorSelector').css('backgroundColor');
+      var parts = rgbString.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+      delete (parts[0]);
+      for (var i = 1; i <= 3; ++i) {
+          parts[i] = parseInt(parts[i]).toString(16);
+          if (parts[i].length == 1) parts[i] = '0' + parts[i];
+      }
+      var hexString ='#'+parts.join('').toUpperCase();
+      $(this).ColorPickerSetColor(hexString);
     }
   });
 
@@ -150,6 +163,19 @@ $(document).ready(function() {
       } else {
         data[get_guid()].options.disable_search = false;
       }
+      chrome.storage.sync.set(data);
+    });
+  });
+
+  $('#open_using').change(function() {
+    var element = $(this);
+    chrome.storage.sync.get(get_guid(), function(data) {
+      if(data[get_guid()].options === undefined) {
+        data[get_guid()].options = {};
+      }
+
+      data[get_guid()].options.open_using = element.val();
+      console.log(data[get_guid()].options);
       chrome.storage.sync.set(data);
     });
   });
@@ -249,6 +275,10 @@ $(document).ready(function() {
   chrome.storage.sync.get(get_guid(), function(data) {
     if (data[get_guid()] && data[get_guid()].options && data[get_guid()].options.disable_search == true) {
       $("#disable_search").attr("checked", true);
+    }
+
+    if (data[get_guid()] && data[get_guid()].options && data[get_guid()].options.open_using) {
+      $("#open_using").val(data[get_guid()].options.open_using);
     }
   });
 });

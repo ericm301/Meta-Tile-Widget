@@ -25,6 +25,26 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
   }
 });
 
+chrome.extension.onMessage.addListener(function(request) {
+  switch(request.open_using) {
+    case "normal":
+      chrome.tabs.update({ url: request.url });
+      break;
+    case "newtab":
+      chrome.tabs.create({ url: request.url, active: true });
+      break;
+    case "newtab-inactive":
+      chrome.tabs.create({ url: request.url, active: false });
+      break;
+    case "pin":
+      chrome.tabs.update({ url: request.url, pinned: true });
+      break;
+    case "pin-inactive":
+      chrome.tabs.create({ url: request.url, pinned: true, active: false });
+      break;
+  }
+});
+
 //icon cache
 
 function getBase64Image(image) {
